@@ -81,6 +81,7 @@ import * as TestimonialItem from "~/sections/testimonials/item";
 import * as TestimonialItems from "~/sections/testimonials/items";
 import * as VideoEmbed from "~/sections/video-embed";
 import * as VideoEmbedItem from "~/sections/video-embed/video";
+import * as SiluaFaq from '../sections/silua-faq';
 
 export const components: HydrogenComponent[] = [
   SubHeading,
@@ -169,4 +170,5 @@ export const components: HydrogenComponent[] = [
   SlideShow,
   SlideShowSlide,
   Spacer,
+  SiluaFaq,
 ];
