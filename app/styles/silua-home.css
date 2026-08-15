@@ -80,7 +80,7 @@
   }
 
   /* ============ HERO — full-bleed cinematic ============ */
-  .hero {
+  &.hero {
     position: relative;
     min-height: 100vh;
     background: var(--mocha);
@@ -275,7 +275,7 @@
   }
 
   /* ============ Section base ============ */
-  .silua-section {
+  &.silua-section {
     padding: 140px 52px;
     position: relative;
   }
@@ -329,24 +329,24 @@
   }
 
   /* Section header on dark */
-  .dark-section .section-header {
+  &.dark-section .section-header {
     border-bottom-color: var(--line-on-dark);
   }
-  .dark-section .section-num {
+  &.dark-section .section-num {
     color: var(--clay-light);
   }
-  .dark-section .section-title {
+  &.dark-section .section-title {
     color: var(--cream);
   }
-  .dark-section .section-title em {
+  &.dark-section .section-title em {
     color: var(--clay-light);
   }
-  .dark-section .section-desc {
+  &.dark-section .section-desc {
     color: rgba(242, 236, 225, 0.5);
   }
 
   /* ============ 01 · THE STORY ============ */
-  .story {
+  &.story {
     background: var(--cream);
   }
   .story-body {
@@ -451,7 +451,7 @@
   }
 
   /* ============ 02 · THE COLLECTION ============ */
-  .talismans {
+  &.talismans {
     background: var(--mocha);
     color: var(--cream);
   }
@@ -582,7 +582,7 @@
   }
 
   /* ============ 03 · BESTSELLERS ============ */
-  .bestsellers {
+  &.bestsellers {
     background: var(--cream-warm);
   }
   .best-grid {
@@ -739,7 +739,7 @@
   }
 
   /* ============ RITUAL STRIP ============ */
-  .ritual-strip {
+  &.ritual-strip {
     background: var(--mocha-soft);
     color: var(--cream);
     padding: 100px 52px;
@@ -810,7 +810,7 @@
   }
 
   /* ============ 04 · VOICES ============ */
-  .voices {
+  &.voices {
     background: var(--cream);
     padding-bottom: 130px;
   }
@@ -899,7 +899,7 @@
   }
 
   /* ============ 05 · MEMBERSHIP (Circle Silua) ============ */
-  .membership {
+  &.membership {
     background: var(--cream-deep);
     color: var(--mocha);
     position: relative;
@@ -1116,7 +1116,7 @@
   }
 
   /* ============ 06 · SUBSCRIBE (Journal) ============ */
-  .subscribe {
+  &.subscribe {
     background: var(--mocha);
     color: var(--cream);
     padding: 130px 52px;
@@ -1316,7 +1316,7 @@
   }
 
   /* ============ FOOTER ============ */
-  .silua-footer {
+  &.silua-footer {
     background: var(--mocha);
     color: var(--cream);
     padding: 100px 52px 34px;
@@ -1446,10 +1446,10 @@
     }
   }
   @media (max-width: 780px) {
-    .silua-section {
+    &.silua-section {
       padding: 90px 24px;
     }
-    .hero {
+    &.hero {
       padding: 120px 24px 40px;
     }
     .hero-bottom-bar {
@@ -1498,13 +1498,13 @@
     .subscribe-right {
       padding: 32px 24px;
     }
-    .ritual-strip {
+    &.ritual-strip {
       padding: 90px 24px;
     }
-    .subscribe {
+    &.subscribe {
       padding: 90px 24px;
     }
-    .silua-footer {
+    &.silua-footer {
       padding: 90px 24px 34px;
     }
   }

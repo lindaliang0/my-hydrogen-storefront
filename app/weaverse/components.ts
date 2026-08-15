@@ -72,8 +72,21 @@ import * as PromotionGridItem from "~/sections/promotion-grid/item";
 import * as RelatedArticles from "~/sections/related-articles";
 import * as RelatedProducts from "~/sections/related-products";
 import * as RelatedProductsItems from "~/sections/related-products/items";
+import * as SiluaBestsellerItem from "~/sections/silua-bestsellers/bestseller-item";
+import * as SiluaBestsellers from "~/sections/silua-bestsellers";
 import * as SiluaFaq from "~/sections/silua-faq";
 import * as SiluaFaqItem from "~/sections/silua-faq/faq-item";
+import * as SiluaFooter from "~/sections/silua-footer";
+import * as SiluaHero from "~/sections/silua-hero";
+import * as SiluaMembership from "~/sections/silua-membership";
+import * as SiluaTier from "~/sections/silua-membership/tier";
+import * as SiluaRitual from "~/sections/silua-ritual";
+import * as SiluaStory from "~/sections/silua-story";
+import * as SiluaSubscribe from "~/sections/silua-subscribe";
+import * as SiluaTalismanItem from "~/sections/silua-talismans/talisman-item";
+import * as SiluaTalismans from "~/sections/silua-talismans";
+import * as SiluaVoiceItem from "~/sections/silua-voices/voice-item";
+import * as SiluaVoices from "~/sections/silua-voices";
 import * as SingleProduct from "~/sections/single-product";
 import * as SlideShow from "~/sections/slideshow";
 import * as SlideShowSlide from "~/sections/slideshow/slide";
@@ -171,4 +184,17 @@ export const components: HydrogenComponent[] = [
   Spacer,
   SiluaFaq,
   SiluaFaqItem,
+  SiluaBestsellers,
+  SiluaBestsellerItem,
+  SiluaFooter,
+  SiluaHero,
+  SiluaMembership,
+  SiluaTier,
+  SiluaRitual,
+  SiluaStory,
+  SiluaSubscribe,
+  SiluaTalismans,
+  SiluaTalismanItem,
+  SiluaVoices,
+  SiluaVoiceItem,
 ];

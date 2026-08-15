@@ -2,12 +2,14 @@ import type { SeoConfig } from "@shopify/hydrogen";
 import { AnalyticsPageType, getSeoMeta } from "@shopify/hydrogen";
 import { getWeaverseSeoMeta, type PageType } from "@weaverse/hydrogen";
 import type { LoaderFunctionArgs, MetaFunction } from "react-router";
-import { useLoaderData } from "react-router";
 import type { ShopQuery } from "storefront-api.generated";
 import { seoPayload } from "~/.server/seo";
-import { SiluaHomepage } from "~/components/silua-homepage";
 import { routeHeaders } from "~/utils/cache";
 import { validateWeaverseData, WeaverseContent } from "~/weaverse";
+import {
+  buildSiluaHomePage,
+  hasSiluaSections,
+} from "~/weaverse/silua-home-page";
 
 export const headers = routeHeaders;
 
@@ -23,23 +25,34 @@ export async function loader(args: LoaderFunctionArgs) {
   }
 
   // Load async data in parallel for better performance
-  const [weaverseData, { shop }] = await Promise.all([
-    // The Silua homepage (INDEX) is a code-defined design; Weaverse is only
-    // used for root-level custom pages served by this route.
-    type === "INDEX"
-      ? Promise.resolve(null)
-      : context.weaverse.loadPage({ type }),
+  const [rawWeaverseData, { shop }] = await Promise.all([
+    context.weaverse.loadPage({ type }),
     // Shop name/description only — effectively static content.
     context.storefront.query<ShopQuery>(SHOP_QUERY, {
       cache: context.storefront.CacheLong(),
     }),
   ]);
 
+  let weaverseData = rawWeaverseData;
+  // Until a Silua composition is saved in Studio, render the code-defined
+  // Silua homepage built from the registered Weaverse sections. Once the
+  // cloud page contains any silua-* section, it takes over automatically.
+  if (
+    type === "INDEX" &&
+    weaverseData &&
+    !weaverseData.configs?.isPreviewMode &&
+    !hasSiluaSections(weaverseData.page)
+  ) {
+    weaverseData = { ...weaverseData, page: buildSiluaHomePage() };
+  }
+
+  // Check weaverseData after parallel loading
+  validateWeaverseData(weaverseData);
+
   const seo = type === "INDEX" ? seoPayload.home({ shop }) : null;
 
   return {
     shop,
-    type,
     weaverseData,
     analytics: {
       pageType: AnalyticsPageType.home,
@@ -58,17 +71,6 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 };
 
 export default function Homepage() {
-  const { type, weaverseData } = useLoaderData<typeof loader>();
-
-  // The real homepage renders the Silua design; CUSTOM pages (root-level
-  // Weaverse handles) keep rendering the Weaverse visual builder content.
-  if (type === "INDEX") {
-    return <SiluaHomepage />;
-  }
-
-  if (weaverseData) {
-    validateWeaverseData(weaverseData);
-  }
   return <WeaverseContent />;
 }
 
