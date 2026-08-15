@@ -72,6 +72,8 @@ import * as PromotionGridItem from "~/sections/promotion-grid/item";
 import * as RelatedArticles from "~/sections/related-articles";
 import * as RelatedProducts from "~/sections/related-products";
 import * as RelatedProductsItems from "~/sections/related-products/items";
+import * as SiluaFaq from "~/sections/silua-faq";
+import * as SiluaFaqItem from "~/sections/silua-faq/faq-item";
 import * as SingleProduct from "~/sections/single-product";
 import * as SlideShow from "~/sections/slideshow";
 import * as SlideShowSlide from "~/sections/slideshow/slide";
@@ -81,7 +83,6 @@ import * as TestimonialItem from "~/sections/testimonials/item";
 import * as TestimonialItems from "~/sections/testimonials/items";
 import * as VideoEmbed from "~/sections/video-embed";
 import * as VideoEmbedItem from "~/sections/video-embed/video";
-import * as SiluaFaq from '../sections/silua-faq';
 
 export const components: HydrogenComponent[] = [
   SubHeading,
@@ -120,8 +121,6 @@ export const components: HydrogenComponent[] = [
   NewsLetterForm,
   ContactUs,
   MessageUsButton,
-  Blogs,
-  BlogPost,
   FeaturedProducts,
   FeaturedProductItems,
   Testimonial,
@@ -171,4 +170,5 @@ export const components: HydrogenComponent[] = [
   SlideShowSlide,
   Spacer,
   SiluaFaq,
+  SiluaFaqItem,
 ];
