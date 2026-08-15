@@ -2,8 +2,10 @@ import type { SeoConfig } from "@shopify/hydrogen";
 import { AnalyticsPageType, getSeoMeta } from "@shopify/hydrogen";
 import { getWeaverseSeoMeta, type PageType } from "@weaverse/hydrogen";
 import type { LoaderFunctionArgs, MetaFunction } from "react-router";
+import { useLoaderData } from "react-router";
 import type { ShopQuery } from "storefront-api.generated";
 import { seoPayload } from "~/.server/seo";
+import { SiluaHomepage } from "~/components/silua-homepage";
 import { routeHeaders } from "~/utils/cache";
 import { validateWeaverseData, WeaverseContent } from "~/weaverse";
 
@@ -22,23 +24,22 @@ export async function loader(args: LoaderFunctionArgs) {
 
   // Load async data in parallel for better performance
   const [weaverseData, { shop }] = await Promise.all([
-    context.weaverse.loadPage({ type }),
+    // The Silua homepage (INDEX) is a code-defined design; Weaverse is only
+    // used for root-level custom pages served by this route.
+    type === "INDEX"
+      ? Promise.resolve(null)
+      : context.weaverse.loadPage({ type }),
     // Shop name/description only — effectively static content.
     context.storefront.query<ShopQuery>(SHOP_QUERY, {
       cache: context.storefront.CacheLong(),
     }),
   ]);
 
-  // Check weaverseData after parallel loading
-  validateWeaverseData(weaverseData);
-
-  // INDEX uses the code-defined homepage SEO (now reflecting the shop name);
-  // CUSTOM pages (root-level Weaverse handles served by this route) get their
-  // SEO from Weaverse via getWeaverseSeoMeta in the meta export below.
   const seo = type === "INDEX" ? seoPayload.home({ shop }) : null;
 
   return {
     shop,
+    type,
     weaverseData,
     analytics: {
       pageType: AnalyticsPageType.home,
@@ -55,7 +56,19 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   }
   return getWeaverseSeoMeta(data?.weaverseData);
 };
+
 export default function Homepage() {
+  const { type, weaverseData } = useLoaderData<typeof loader>();
+
+  // The real homepage renders the Silua design; CUSTOM pages (root-level
+  // Weaverse handles) keep rendering the Weaverse visual builder content.
+  if (type === "INDEX") {
+    return <SiluaHomepage />;
+  }
+
+  if (weaverseData) {
+    validateWeaverseData(weaverseData);
+  }
   return <WeaverseContent />;
 }
 
