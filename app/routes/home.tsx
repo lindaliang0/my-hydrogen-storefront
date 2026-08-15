@@ -37,13 +37,27 @@ export async function loader(args: LoaderFunctionArgs) {
   // Until a Silua composition is saved in Studio, render the code-defined
   // Silua homepage built from the registered Weaverse sections. Once the
   // cloud page contains any silua-* section, it takes over automatically.
+  //
+  // IMPORTANT: keep the cloud page metadata (id, updatedAt, createdAt, ...)
+  // intact and only swap items/rootId. Weaverse Studio uses page.id +
+  // updatedAt for optimistic concurrency on save — replacing the whole page
+  // (losing those fields) makes Studio believe another session updated the
+  // project and reject the save with "项目已在另一会话中更新".
   if (
     type === "INDEX" &&
     weaverseData &&
     !weaverseData.configs?.isPreviewMode &&
     !hasSiluaSections(weaverseData.page)
   ) {
-    weaverseData = { ...weaverseData, page: buildSiluaHomePage() };
+    const siluaPage = buildSiluaHomePage();
+    weaverseData = {
+      ...weaverseData,
+      page: {
+        ...weaverseData.page,
+        rootId: siluaPage.rootId,
+        items: siluaPage.items,
+      },
+    };
   }
 
   // Check weaverseData after parallel loading

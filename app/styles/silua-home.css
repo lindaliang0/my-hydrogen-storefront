@@ -41,9 +41,9 @@
   --line-soft: rgba(42, 36, 30, 0.08);
   --line-on-dark: rgba(242, 236, 225, 0.16);
 
-  --serif-display: "Playfair Display", ui-serif, Georgia, serif;
-  --serif-body: "Cormorant Garamond", ui-serif, Georgia, serif;
-  --sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --serif-display: "Playfair Display", "Noto Serif SC", serif;
+  --serif-body: "Cormorant Garamond", "Noto Serif SC", serif;
+  --sans: "Inter", -apple-system, sans-serif;
 
   background: var(--cream);
   color: var(--mocha);
@@ -98,7 +98,7 @@
     z-index: 0;
     animation: silua-hero-zoom 22s ease-out forwards;
   }
-  .hero::before {
+  &.hero::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -142,7 +142,7 @@
     height: 1px;
     background: var(--clay-light);
   }
-  .hero h1 {
+  &.hero h1 {
     font-family: var(--serif-display);
     font-weight: 400;
     font-size: clamp(58px, 7.6vw, 122px);
@@ -151,7 +151,7 @@
     color: var(--cream);
     margin-bottom: 40px;
   }
-  .hero h1 em {
+  &.hero h1 em {
     font-family: var(--serif-body);
     font-style: italic;
     font-weight: 400;
@@ -455,7 +455,7 @@
     background: var(--mocha);
     color: var(--cream);
   }
-  .talismans::before {
+  &.talismans::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -472,7 +472,7 @@
       );
     pointer-events: none;
   }
-  .talismans > * {
+  &.talismans > * {
     position: relative;
     z-index: 1;
   }
@@ -747,7 +747,7 @@
     position: relative;
     overflow: hidden;
   }
-  .ritual-strip::before {
+  &.ritual-strip::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -758,16 +758,16 @@
     );
     pointer-events: none;
   }
-  .ritual-strip > * {
+  &.ritual-strip > * {
     position: relative;
     z-index: 1;
   }
-  .ritual-strip .eyebrow {
+  &.ritual-strip .eyebrow {
     color: var(--clay-light);
     margin-bottom: 30px;
     display: inline-block;
   }
-  .ritual-strip h3 {
+  &.ritual-strip h3 {
     font-family: var(--serif-display);
     font-weight: 400;
     font-size: clamp(34px, 3.8vw, 58px);
@@ -777,13 +777,13 @@
     letter-spacing: -0.02em;
     color: var(--cream);
   }
-  .ritual-strip h3 em {
+  &.ritual-strip h3 em {
     font-family: var(--serif-body);
     font-style: italic;
     color: var(--clay-light);
     font-weight: 400;
   }
-  .ritual-strip .sub {
+  &.ritual-strip .sub {
     font-family: var(--serif-body);
     font-size: 19px;
     font-style: italic;
@@ -904,7 +904,7 @@
     color: var(--mocha);
     position: relative;
   }
-  .membership::before {
+  &.membership::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -915,7 +915,7 @@
     filter: sepia(0.4) saturate(0.6);
     pointer-events: none;
   }
-  .membership > * {
+  &.membership > * {
     position: relative;
     z-index: 1;
   }
@@ -1123,7 +1123,7 @@
     position: relative;
     overflow: hidden;
   }
-  .subscribe::before {
+  &.subscribe::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -1140,7 +1140,7 @@
       );
     pointer-events: none;
   }
-  .subscribe > * {
+  &.subscribe > * {
     position: relative;
     z-index: 1;
   }

@@ -40,6 +40,14 @@ export async function createHydrogenRouterContext(
     AppSession.init(request, [env.SESSION_SECRET]),
   ]);
 
+  // Oxygen may inject an invalid PRIVATE_STOREFRONT_API_TOKEN, which makes
+  // the storefront client prefer private auth and return 403 on every query.
+  // Force the public token path (matches the commented-out private token in
+  // .env, where the project intentionally uses only the public token).
+  if (env.PRIVATE_STOREFRONT_API_TOKEN) {
+    env.PRIVATE_STOREFRONT_API_TOKEN = "";
+  }
+
   const hydrogenContext = createHydrogenContext(
     {
       env,
