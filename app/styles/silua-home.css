@@ -79,91 +79,6 @@
     letter-spacing: 0.02em;
   }
 
-  /* ===== Nav ===== */
-  .nav {
-    position: fixed;
-    inset: 0 0 auto;
-    z-index: 100;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    padding: 22px 52px;
-    background: rgba(242, 236, 225, 0.78);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--line-soft);
-    transition:
-      background 0.5s,
-      border-color 0.5s,
-      color 0.5s;
-  }
-  .nav.on-dark {
-    background: rgba(42, 36, 30, 0.55);
-    border-bottom-color: var(--line-on-dark);
-    color: var(--cream);
-  }
-  .nav.on-dark .nav-link {
-    color: var(--cream);
-  }
-  .nav.on-dark .brand-mark {
-    color: var(--cream);
-  }
-  .nav.on-dark .brand-mark .dot {
-    background: var(--clay-light);
-  }
-
-  .nav-left,
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 34px;
-    font-family: var(--sans);
-    font-size: 11px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    font-weight: 400;
-  }
-  .nav-right {
-    justify-content: flex-end;
-  }
-  .nav-link {
-    color: var(--mocha);
-    position: relative;
-    transition: opacity 0.3s;
-  }
-  .nav-link:hover {
-    opacity: 0.55;
-  }
-  .brand-mark {
-    font-family: var(--serif-display);
-    font-size: 24px;
-    letter-spacing: 0.38em;
-    padding-left: 0.38em;
-    font-weight: 500;
-    color: var(--mocha);
-    transition: color 0.5s;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .brand-mark .dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--clay);
-    transition: background 0.5s;
-  }
-  .cart-count {
-    display: inline-block;
-    margin-left: 6px;
-    font-family: var(--serif-body);
-    font-style: italic;
-    font-size: 13px;
-    color: var(--clay);
-    letter-spacing: 0;
-    text-transform: none;
-  }
-
   /* ============ HERO — full-bleed cinematic ============ */
   .hero {
     position: relative;
@@ -1531,19 +1446,6 @@
     }
   }
   @media (max-width: 780px) {
-    .nav {
-      padding: 18px 24px;
-    }
-    .nav-left,
-    .nav-right {
-      gap: 16px;
-      font-size: 10px;
-    }
-    .nav-left .nav-link:nth-child(n + 3),
-    .nav-right .nav-link:nth-child(1),
-    .nav-right .nav-link:nth-child(2) {
-      display: none;
-    }
     .silua-section {
       padding: 90px 24px;
     }

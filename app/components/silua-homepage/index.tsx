@@ -7,7 +7,6 @@ import {
   useState,
 } from "react";
 import "~/styles/silua-home.css";
-import { useCartStore } from "~/components/cart/store";
 import {
   BESTSELLERS,
   FOOTER_COLUMNS,
@@ -24,20 +23,17 @@ import {
 } from "./data";
 
 /* ------------------------------------------------------------------ */
-/*  Interactions: reveal-on-scroll, nav dark-mode switch, smooth scroll */
+/*  Interactions: reveal-on-scroll, smooth scrolling                    */
 /* ------------------------------------------------------------------ */
 
 function useSiluaInteractions(rootRef: React.RefObject<HTMLDivElement | null>) {
-  // Smooth anchor scrolling with offset for the fixed nav.
+  // Smooth anchor scrolling.
   useEffect(() => {
     const html = document.documentElement;
     const prevBehavior = html.style.scrollBehavior;
-    const prevPadding = html.style.scrollPaddingTop;
     html.style.scrollBehavior = "smooth";
-    html.style.scrollPaddingTop = "80px";
     return () => {
       html.style.scrollBehavior = prevBehavior;
-      html.style.scrollPaddingTop = prevPadding;
     };
   }, []);
 
@@ -71,72 +67,6 @@ function useSiluaInteractions(rootRef: React.RefObject<HTMLDivElement | null>) {
       return () => revealIO.disconnect();
     }
   }, [rootRef]);
-
-  // Swap the fixed nav to its dark variant when a dark section is under it.
-  useEffect(() => {
-    const root = rootRef.current;
-    const nav = root?.querySelector<HTMLElement>(".nav");
-    if (!root || !nav) return;
-
-    const darkSections = root.querySelectorAll<HTMLElement>(
-      ".hero, .talismans, .ritual-strip, .subscribe, .silua-footer",
-    );
-    const updateNav = () => {
-      const anyDark = Array.from(darkSections).some((section) => {
-        const rect = section.getBoundingClientRect();
-        return rect.top < 60 && rect.bottom > 60;
-      });
-      nav.classList.toggle("on-dark", anyDark);
-    };
-
-    updateNav();
-    window.addEventListener("scroll", updateNav, { passive: true });
-    return () => window.removeEventListener("scroll", updateNav);
-  }, [rootRef]);
-}
-
-/* ------------------------------------------------------------------ */
-/*  Nav                                                                */
-/* ------------------------------------------------------------------ */
-
-function Nav() {
-  const serverCart = useCartStore((state) => state.serverCart);
-  const cartCount = serverCart?.totalQuantity ?? 0;
-
-  return (
-    <nav className="nav" id="silua-nav">
-      <div className="nav-left">
-        <a href="#story" className="nav-link">
-          The Story
-        </a>
-        <a href="#collection" className="nav-link">
-          Collection
-        </a>
-        <a href="#bestsellers" className="nav-link">
-          Bestsellers
-        </a>
-        <a href="#membership" className="nav-link">
-          Circle Silua
-        </a>
-      </div>
-      <div className="brand-mark">
-        <span className="dot" />
-        SILUA
-      </div>
-      <div className="nav-right">
-        <a href="#" className="nav-link">
-          Journal
-        </a>
-        <a href="#subscribe" className="nav-link">
-          Subscribe
-        </a>
-        <a href="#" className="nav-link">
-          Bag
-          {cartCount > 0 && <span className="cart-count">({cartCount})</span>}
-        </a>
-      </div>
-    </nav>
-  );
 }
 
 /* ------------------------------------------------------------------ */
@@ -713,7 +643,6 @@ export function SiluaHomepage() {
 
   return (
     <div ref={rootRef} className="silua-home">
-      <Nav />
       <Hero />
       <Story />
       <Talismans />
